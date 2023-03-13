@@ -95,37 +95,37 @@ end
 
 def match()
     if @color_one == @code[0]
-    @matches += 1
-    puts "MATCH"
+        @matches += 1
+        puts "MATCH"
     end
     if @color_two == @code[1]
-    @matches += 1
-    puts "MATCH"
+        @matches += 1
+        puts "MATCH"
     end
     if @color_three == @code[2]
-    @matches += 1
-    puts "MATCH"
+        @matches += 1
+        puts "MATCH"
     end
     if @color_four == @code[3]
-    @matches += 1
-    puts "MATCH"
+        @matches += 1
+        puts "MATCH"
     end
-    if (@color_one != @color_two ||
-    @color_one != @color_three || @color_one != @color_four) && (@color_one == @code[1] || @color_one == @code[2] || @color_one == @code[3])
-    @color_matches += 1
-    puts "match1"
-    #end
-    elsif (@color_two != @color_one || @color_two != @color_three || @color_two != @color_four) && (@color_two == @code[0] || @color_two == @code[2] || @color_two == @code[3])
-    @color_matches += 1
-    puts "match2"
-    #end
-    elsif (@color_three != @color_one || @color_three != @color_two || @color_three != @color_four) && (@color_three == @code[0] || @color_three == @code[1] || @color_three == @code[3])
-    @color_matches += 1
-    puts "match3"
-    #end
-    elsif (@color_four != @color_one || @color_four != @color_two || @color_four != @color_three) &&(@color_four == @code[0] || @color_four == @code[1] || @color_four == @code[2])
-    @color_matches += 1
-    puts "match4"  
+    
+    if @matches == 0 && (@color_one == @code[1] || @color_one == @code[2] || @color_one == @code[3])
+        @color_matches += 1
+        puts "match"
+    end
+    if (@color_two != @color_one) && (@color_two == @code[0] || @color_two == @code[2] || @color_two == @code[3])
+        @color_matches += 1
+        puts "match"
+    end
+    if (@color_three != @color_one && @color_three != @color_two) && (@color_three == @code[0] || @color_three == @code[1] || @color_three == @code[3])
+        @color_matches += 1
+        puts "match"
+    end
+    if (@color_four != @color_one && @color_four != @color_two && @color_four != @color_three) &&(@color_four == @code[0] || @color_four == @code[1] || @color_four == @code[2])
+        @color_matches += 1
+        puts "match"  
     end
 
     if @matches == 0 && @color_matches == 0
