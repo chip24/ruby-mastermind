@@ -113,19 +113,19 @@ def match()
     
     if @matches == 0 && (@color_one == @code[1] || @color_one == @code[2] || @color_one == @code[3])
         @color_matches += 1
-        puts "match"
+        puts "match1"
     end
     if (@color_two != @color_one) && (@color_two == @code[0] || @color_two == @code[2] || @color_two == @code[3])
         @color_matches += 1
-        puts "match"
+        puts "match2"
     end
     if (@color_three != @color_one && @color_three != @color_two) && (@color_three == @code[0] || @color_three == @code[1] || @color_three == @code[3])
         @color_matches += 1
-        puts "match"
+        puts "match3"
     end
     if (@color_four != @color_one && @color_four != @color_two && @color_four != @color_three) &&(@color_four == @code[0] || @color_four == @code[1] || @color_four == @code[2])
         @color_matches += 1
-        puts "match"  
+        puts "match4"  
     end
 
     if @matches == 0 && @color_matches == 0
