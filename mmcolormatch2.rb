@@ -97,6 +97,7 @@ end
 def match()
     if @color_one == @code[0]
         @matches += 1
+        #p @match_array
         @match_array << @color_one
         #p @match_array
         puts "MATCH"

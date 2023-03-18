@@ -2,10 +2,11 @@
 class PlayerGuessGame
 
     @@turn_count = 0
-    winner = ''
+    #winner = ''
     @@matches = 0
     @@color_matches = 0
     @@player = ''
+    @@match_array = []
     
     
     @@board = [
@@ -63,22 +64,22 @@ class PlayerGuessGame
     def player_guess()
         puts "#{@@player}, please enter your guess of four colors."
         input = gets.chomp
-        input_array = input.split
-        @color_one = input_array[0]
-        @color_two = input_array[1]
-        @color_three = input_array[2]
-        @color_four = input_array[3]
+        @input_array = input.split
+        @color_one = @input_array[0]
+        @color_two = @input_array[1]
+        @color_three = @input_array[2]
+        @color_four = @input_array[3]
         
 
         # loop until the user input is valid (has spaces between, includes four colors, and includes one of the six color codes)
-        until input.count("^roygbp ") == 0 && input_array.count == 4
+        until input.count("^roygbp ") == 0 && @input_array.count == 4
             puts "Make sure you entered a valid list of four colors including only r, o, y, g, b, and, p with a space between each color."
             input = gets.chomp
-            input_array = input.split
-            @color_one = input_array[0]
-            @color_two = input_array[1]
-            @color_three = input_array[2]
-            @color_four = input_array[3]
+            @input_array = input.split
+            @color_one = @input_array[0]
+            @color_two = @input_array[1]
+            @color_three = @input_array[2]
+            @color_four = @input_array[3]
                 
         end
 
@@ -97,40 +98,48 @@ class PlayerGuessGame
     def match()
         if @color_one == @code[0]
             @@matches += 1
+            #puts @color_one
+            #p @color_one
+            #p @@match_array
+            #puts @@match_array
+            #puts @@match_array.class
+            @@match_array << @color_one
             puts "MATCH"
         end
         if @color_two == @code[1]
             @@matches += 1
+            @@match_array << @color_two
             puts "MATCH"
         end
         if @color_three == @code[2]
             @@matches += 1
+            @@match_array << @color_three
             puts "MATCH"
         end
         if @color_four == @code[3]
             @@matches += 1
+            @@match_array << @color_four
             puts "MATCH"
         end
         
-        if @@matches == 0 && (@color_one == @code[1] || @color_one == @code[2] || @color_one == @code[3])
-            @@color_matches += 1
-            puts "match1"
-        end
-        if (@color_two != @color_one) && (@color_two == @code[0] || @color_two == @code[2] || @color_two == @code[3])
-            @@color_matches += 1
-            puts "match2"
-        end
-        if (@color_three != @color_one && @color_three != @color_two) && (@color_three == @code[0] || @color_three == @code[1] || @color_three == @code[3])
-            @@color_matches += 1
-            puts "match3"
-        end
-        if (@color_four != @color_one && @color_four != @color_two && @color_four != @color_three) &&(@color_four == @code[0] || @color_four == @code[1] || @color_four == @code[2])
-            @@color_matches += 1
-            puts "match4"  
-        end
+        # find a way to remove matches from unique on 3/17
+        unique = @input_array.uniq
+        #puts "The unique colors are #{unique}"
+        #p @@match_array
+        #if @@match_array.empty? == false
+        possible_color_matches = unique - @@match_array
+            #puts "The possible color matches are #{possible_color_matches}"
+        #else
+        #    possible_color_matches = unique
+        #git aend
+
+
+        @@color_matches = possible_color_matches.count{|i| @code.include?(i)}
+        puts "match\n" * @@color_matches
+        
 
         if @@matches == 0 && @@color_matches == 0
-            puts "You have 0 MATCHES and 0 matches."
+        puts "You have 0 MATCHES and 0 matches.\n\r"
         end
 
     end
@@ -146,6 +155,7 @@ class PlayerGuessGame
         # reset matches after checking
         @@matches = 0
         @@color_matches = 0
+        @@match_array = []
     end
 
     def play_game()
