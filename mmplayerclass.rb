@@ -131,7 +131,7 @@ class PlayerGuessGame
             #puts "The possible color matches are #{possible_color_matches}"
         #else
         #    possible_color_matches = unique
-        #git aend
+        #git end
 
 
         @@color_matches = possible_color_matches.count{|i| @code.include?(i)}
